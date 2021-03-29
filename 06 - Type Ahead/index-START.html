@@ -15,7 +15,46 @@
     </ul>
   </form>
 <script>
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+  const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+  const input = document.querySelector('.search');
+  const suggestions = document.querySelector('.suggestions');
+  const cities = [];
+
+  fetch(endpoint)
+      .then(response => response.json())
+      .then(data => cities.push(...data));
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  const displayMatches = (matches) => {
+    const html = matches.map((match) => {
+        return `<li>
+              <span class="name">
+                ${match.city}, ${match.state}
+              </span>
+              <span class="population">
+                ${numberWithCommas(match.population)}
+              </span>
+        </li>`;
+    }).join("");
+    suggestions.innerHTML = html;
+  }
+
+  const findMatches = (e) => {
+    const value = e.target.value
+    console.log(e.target.value);
+
+    const matches = cities.filter((item) => {
+      const regex = new RegExp(value, "gi");
+      return item.city.match(regex) || item.state.match(regex);
+    });
+    displayMatches(matches);
+  }
+
+  input.addEventListener('keyup', findMatches);
+
 
 </script>
 </body>
