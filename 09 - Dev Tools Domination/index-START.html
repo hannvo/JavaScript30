@@ -18,29 +18,54 @@
     }
 
     // Regular
+    console.log('hi');
 
     // Interpolated
+    const name = 'hans';
+    console.log(`hi ${name}`);
 
     // Styled
+    console.log('%cHuhu', 'color: purple; background: orange;');
 
     // warning!
+    console.warn('This is a warning!');
 
     // Error :|
+    console.error('This is an error');
 
     // Info
+    console.info('THis is an info');
 
     // Testing
+    console.assert( false, "It's not true");
 
     // clearing
+    console.clear();
 
     // Viewing DOM Elements
+    const p = document.querySelector('p');
+    console.log(p);
+    // console.dir(p);
 
     // Grouping together
+    let i = 1
+    dogs.forEach((dog) => {
+      console.groupCollapsed(i);
+      console.log(dog.name);
+      console.log(`age: ${dog.age}`)
+      console.groupEnd(i);
+      i++;
+    })
 
     // counting
+    console.count('this happened');
+    console.count('this happened');
+    console.count('this happened');
 
     // timing
-
+    console.time('wait');
+    p.addEventListener('mouseover', () => console.log('wow'));
+    console.timeEnd('wait');
   </script>
 </body>
 </html>
