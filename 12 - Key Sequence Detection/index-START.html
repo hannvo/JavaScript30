@@ -7,6 +7,24 @@
 </head>
 <body>
 <script>
+  const keys = [];
+  const secretCode = 'secret';
+
+  const showSecret = () => {
+    const body = document.querySelector('body');
+    body.insertAdjacentHTML('afterbegin', '<h1>SECRET</h1>');
+    cornify_add();
+  }
+
+  const handleKey = (e) => {
+    keys.push(e.key);
+    keys.splice(-secretCode.length - 1, keys.length - secretCode.length);
+    if (keys.join('') == secretCode) {
+      showSecret();
+    }
+  }
+
+  window.addEventListener('keyup', handleKey)
 </script>
 </body>
 </html>
